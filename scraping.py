@@ -48,9 +48,6 @@ train_data_players = train_data_players.replace({"NONE": None})
 train_data_players = train_data_players.dropna()
 x = train_data_players.drop("teamPosition", axis=1).to_numpy(dtype="int32")[:-20]
 y = train_data_players["teamPosition"].replace({"TOP":0, "JUNGLE":1, "MIDDLE":2, "BOTTOM":3, "UTILITY":4}).to_numpy(dtype="int32")
-x_test = train_data_players.drop("teamPosition", axis=1).to_numpy(dtype="int32")[-20:]
-y_test = train_data_players["teamPosition"].replace({"TOP":0, "JUNGLE":1, "MIDDLE":2, "BOTTOM":3, "UTILITY":4}).to_numpy(dtype="int32")
-
 
 # DeepNN
 ### layer input
@@ -70,7 +67,7 @@ ml.utils.plot_model(model, to_file="model.png", show_shapes=True, show_layer_nam
 
 # compile the neural network
 model.compile(optimizer="adam", loss='categorical_crossentropy',
-              metrics=['accuracy', ml.F1])
+              metrics=['accuracy'])
 
 ## Train
 

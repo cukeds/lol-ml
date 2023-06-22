@@ -100,23 +100,3 @@ def visualize_nn(model, description=False, figsize=(10, 8)):
                 else:
                     ax.add_artist(line)
     plt.show()
-
-# define metrics
-def Recall(y_true, y_pred):
-    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 4)))
-    possible_positives = K.sum(K.round(K.clip(y_true, 0, 4)))
-    recall = true_positives / (possible_positives + K.epsilon())
-    return recall
-
-def Precision(y_true, y_pred):
-    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 4)))
-    predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 4)))
-    precision = true_positives / (predicted_positives + K.epsilon())
-    return precision
-
-def F1(y_true, y_pred):
-    precision = Precision(y_true, y_pred)
-    recall = Recall(y_true, y_pred)
-    return 2*((precision*recall)/(precision+recall+K.epsilon()))
-
-
